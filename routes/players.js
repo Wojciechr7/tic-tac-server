@@ -5,12 +5,15 @@ var game = require('../game/game.js');
 
 
 router.get('/', function(req, res, next) {
-    res.send(game.players);
+    res.send(game.PM.players.map(function(player) {
+        return {
+            name: player.name,
+            id: player.id
+        };
+    }));
 });
 
-router.post('/', function(req, res, next) {
-    console.log(req);
-});
+
 
 
 module.exports = router;

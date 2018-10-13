@@ -1,19 +1,27 @@
+var http = require('http');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+var game = require('./game/game.js');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var playersRouter = require('./routes/players');
+
 
 var app = express();
 
 app.use(cors());
+var server = http.createServer(app);
+server.listen(3001);
+var io = require('socket.io')(server);
 
-
+io.on('connection', function(socket) {
+    console.log('websocket connected');
+    game.runSocketListeners(socket, io);
+});
 
 
 // view engine setup
@@ -27,7 +35,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/players', playersRouter);
 
 // catch 404 and forward to error handler
