@@ -27,7 +27,7 @@ app.use(function(req, res, next) {
 app.use(cors());
 
 var server = http.createServer(app);
-server.listen(port);
+server.listen(normalizePort(process.env.PORT || '3001');
 var io = require('socket.io').listen(server, {
     log: false,
     agent: false,
