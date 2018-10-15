@@ -25,8 +25,12 @@ app.use(function(req, res, next) {
 /*app.use(cors());*/
 var server = http.createServer(app);
 server.listen(process.env.PORT || 3000);
-var io = require('socket.io')(server);
-io.set('origins', '*:*');
+var io = require('socket.io').listen(server, {
+    log: false,
+    agent: false,
+    origins: '*:*',
+    transports: ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling', 'polling']
+});
 
 io.on('connection', function(socket) {
     console.log('websocket connected');
