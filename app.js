@@ -14,9 +14,25 @@ var sessionRouter = require('./routes/session');
 
 var app = express();
 
-app.use(cors());
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+        res.send(200);
+    }
+    else {
+        next();
+    }
+};
+
+app.use(allowCrossDomain);
+
+/*app.use(cors());*/
 var server = http.createServer(app);
-server.listen(3001);
+server.listen(normalizePort(process.env.PORT || '3001'));
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
@@ -54,5 +70,21 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+
+    if (isNaN(port)) {
+        // named pipe
+        return val;
+    }
+
+    if (port >= 0) {
+        // port number
+        return port;
+    }
+
+    return false;
+}
 
 module.exports = app;
