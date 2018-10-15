@@ -5,40 +5,36 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-var game = require('./game/game.js');
+
 
 var indexRouter = require('./routes/index');
 var playersRouter = require('./routes/players');
 var sessionRouter = require('./routes/session');
 
-var port = normalizePort(process.env.PORT || '3000');
 
 
 var app = express();
 
-app.use(function(req, res, next) {
+/*app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", '*');
     res.header("Access-Control-Allow-Credentials", true);
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
     next();
-});
+});*/
 
 app.use(cors());
 
-var server = http.createServer(app);
-server.listen(normalizePort(process.env.PORT || '3001');
-var io = require('socket.io').listen(server, {
+
+/*var io = require('socket.io').listen(server, {
     log: false,
     agent: false,
     origins: '*:*',
     transports: ['websocket', 'htmlfile', 'xhr-polling', 'jsonp-polling', 'polling']
-});
+});*/
 
-io.on('connection', function(socket) {
-    console.log('websocket connected');
-    game.runSocketListeners(socket, io);
-});
+
+
 
 
 // view engine setup
