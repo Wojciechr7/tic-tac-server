@@ -24,9 +24,10 @@ app.use(function(req, res, next) {
     next();
 });
 
-/*app.use(cors());*/
+app.use(cors());
+
 var server = http.createServer(app);
-/*server.listen(port);*/
+server.listen(port);
 var io = require('socket.io').listen(server, {
     log: false,
     agent: false,
