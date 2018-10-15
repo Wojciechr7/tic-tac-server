@@ -14,26 +14,19 @@ var sessionRouter = require('./routes/session');
 
 var app = express();
 
-var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", '*');
+    res.header("Access-Control-Allow-Credentials", true);
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-
-    // intercept OPTIONS method
-    if ('OPTIONS' == req.method) {
-        res.send(200);
-    }
-    else {
-        next();
-    }
-};
-
-app.use(allowCrossDomain);
+    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+    next();
+});
 
 /*app.use(cors());*/
 var server = http.createServer(app);
-server.listen(normalizePort(process.env.PORT || '3001'));
+server.listen(process.env.PORT || 3000);
 var io = require('socket.io')(server);
+io.set('origins', '*:*');
 
 io.on('connection', function(socket) {
     console.log('websocket connected');
