@@ -11,6 +11,8 @@ var indexRouter = require('./routes/index');
 var playersRouter = require('./routes/players');
 var sessionRouter = require('./routes/session');
 
+var port = normalizePort(process.env.PORT || '3000');
+
 
 var app = express();
 
@@ -24,7 +26,7 @@ app.use(function(req, res, next) {
 
 /*app.use(cors());*/
 var server = http.createServer(app);
-server.listen(process.env.PORT || 3000);
+/*server.listen(port);*/
 var io = require('socket.io').listen(server, {
     log: false,
     agent: false,
