@@ -1,5 +1,5 @@
 
-var Square= require('../square');
+var Square= require('../../square');
 
 var Session = function() {
 

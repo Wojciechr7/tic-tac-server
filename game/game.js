@@ -1,6 +1,6 @@
 
 
-var Session = require('./dispatchers/session');
+var Session = require('./dispatchers/lobby/session');
 var Lobby = require('./listeners/lobby');
 var Board = require('./listeners/board');
 
@@ -9,6 +9,7 @@ var game = function () {
 
 
     this.session = new Session();
+
 
 
 

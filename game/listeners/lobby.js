@@ -1,12 +1,12 @@
 
-var Connection = require('../dispatchers/connection');
-var PlayerManager = require('../dispatchers/player-manager');
-var Messager = require('../dispatchers/messager');
+var Connection = require('../dispatchers/lobby/connection');
+var PlayerManager = require('../dispatchers/lobby/player-manager');
+var Messager = require('../dispatchers/lobby/messager');
 
-var Lobby = function(socket, io) {
+var Lobby = function() {
 
-    this.socket = socket;
-    this.io = io;
+   // console.log(as.coolNumber, 'lobby');
+
 
     this.connection = new Connection();
     this.PM = new PlayerManager();
