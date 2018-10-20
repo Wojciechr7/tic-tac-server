@@ -74,7 +74,7 @@ var Session = function() {
             squares: new Array(3).fill(0).map(function(v, i) { return new Array(3).fill(0).map(function(v, j) { return new Square(i, j)})}),
             result: {from: 0, to: 0},
             status: false,
-            actualPlayer: battle.to.socket
+            actualPlayer: battle.to
         })
     };
 
